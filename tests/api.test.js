@@ -20,4 +20,10 @@ describe('Testing API routes', () => {
         expect(response.text).toEqual('Groups available: Regular, Preterite, Imprefect, Future');
     });
 
+    test('/groups/?type=regular', async () => {
+        const response = await request.get('/groups/?type=regular');
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual('regular');
+    })
+
 })
