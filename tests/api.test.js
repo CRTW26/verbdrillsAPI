@@ -17,7 +17,7 @@ describe('Testing API routes', () => {
     test('/groups', async ()  => {
         const response = await request.get('/groups');
         expect(response.status).toBe(200);
-        expect(response.type).toBe
+        expect(response.text).toEqual('Groups available: Regular, Preterite, Imprefect, Future');
     });
 
 })
