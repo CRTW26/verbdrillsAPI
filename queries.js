@@ -1,14 +1,10 @@
-const Pool = require('pg').Pool;
-const pool = new Pool({
-    host: 'localhost',
-    database: 'verbdrillsapi',
-    port: 5432
-})
+const { Client } = require('pg');
+const db = process.env.NODE_ENV === 'test' ? 'verbdrillsapi_test' : 'verbdrillsapi';
 
-const getVerbs = (callback) => {
-    pool.query('SELECT * FROM groups', callback);
-}
+client = new Client({
+    connectionString: `postgresql://localhost/${db}`
+});
 
-module.exports = {
-    getVerbs
-}
+client.connect();
+
+module.exports = client;

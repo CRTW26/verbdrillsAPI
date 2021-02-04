@@ -1,29 +1,35 @@
+process.env.NODE_ENV = 'test';
 const app = require('../index.js');
 const supertest = require('supertest');
 const request = supertest(app);
+const db = require('../queries');
 
 describe('Testing API routes', () => {
 
-    let server; 
+    // let server; 
 
-    beforeEach(() => {
-        server = app.listen(3001);
-    })
+    // beforeEach(() => {
+    //     server = app.listen(3001);
+    // })
 
-    afterEach(async () => {
-        await server.close();
-    })
+    // afterEach(async () => {
+    //     db.end
+    //     await server.close();
+    // })
 
-    test('/groups', async ()  => {
-        const response = await request.get('/groups');
-        expect(response.status).toBe(200);
-        expect(response.text).toEqual('Groups available: Regular, Preterite, Imprefect, Future');
+    beforeAll(async () => {
+        await db.query("CREATE TABLE groups (tense VARCHAR(30), type VARCHAR(15), list json)");
     });
 
-    test('/groups/?type=regular', async () => {
-        const response = await request.get('/groups/?type=regular');
-        expect(response.status).toBe(200);
-        expect(response.body).toEqual('regular');
+    afterAll(async () => {
+        await db.query("DROP TABLE groups");
+        db.end();
+    });
+
+    test('/groups/?tense=present&type=regular', async () => {
+        await db.query("INSERT INTO groups (tense, type, list) VALUES ('present', 'regular', '{\"regular\": {\"hablar\": [\"hablo\"]}}')")
+        const response = await request.get('/groups/?tense=present&type=regular');
+        expect(response.body.rows[0].list.regular.hablar[0]).toEqual('hablo');
     })
 
 })
