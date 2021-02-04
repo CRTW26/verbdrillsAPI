@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 const db = process.env.NODE_ENV === 'test' ? 'verbdrillsapi_test' : 'verbdrillsapi';
 
-client = new Client({
+let client = new Client({
     connectionString: `postgresql://localhost/${db}`
 });
 

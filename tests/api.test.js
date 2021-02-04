@@ -36,8 +36,8 @@ describe('Testing API routes', () => {
         db.end();
     });
 
-    test('/groups/?tense=present&type=regular', async () => {
-        const response = await request.get('/groups/?tense=present&type=regular');
+    test('/verbgroups/?tense=present&type=regular', async () => {
+        const response = await request.get('/verbgroups/?tense=present&type=regular');
         expect(response.body.rows[0].list.regular.hablar[0]).toEqual('hablo');
     });
 
