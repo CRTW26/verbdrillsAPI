@@ -38,17 +38,17 @@ describe('Testing API routes', () => {
 
     test('/verbgroups/?tense=present&type=regular', async () => {
         const response = await request.get('/verbgroups/?tense=present&type=regular');
-        expect(response.body.rows[0].list.regular.hablar[0]).toEqual('hablo');
+        expect(response.body.regular.hablar[0]).toEqual('hablo');
     });
 
     test('/verbgroups/?tense=preterite&type=regular', async () => {
         const response = await request.get('/verbgroups/?tense=preterite&type=regular');
-        expect(response.body.rows[0].list.regular.hablar[0]).toEqual('hable');
+        expect(response.body.regular.hablar[0]).toEqual('hable');
     });
 
     test('/verbgroups/?tense=imperfect&type=regular', async () => {
         const response = await request.get('/verbgroups/?tense=imperfect&type=regular');
-        expect(response.body.rows[0].list.regular.hablar[0]).toEqual('hablaba');
+        expect(response.body.regular.hablar[0]).toEqual('hablaba');
     });
 
 })
