@@ -24,7 +24,7 @@ describe('Testing API routes', () => {
     beforeEach(async () => {
         await db.query("INSERT INTO groups (tense, type, list) VALUES ('present', 'regular', '{\"regular\": {\"hablar\": [\"hablo\"]}}')")
         await db.query("INSERT INTO groups (tense, type, list) VALUES ('preterite', 'regular', '{\"regular\": {\"hablar\": [\"hable\"]}}')")
-        await db.query("INSERT INTO groups (tense, type, list) VALUES ('impeferct', 'regular', '{\"regular\": {\"hablar\": [\"hablaba\"]}}')")
+        await db.query("INSERT INTO groups (tense, type, list) VALUES ('imperfect', 'regular', '{\"regular\": {\"hablar\": [\"hablaba\"]}}')")
     });
 
     afterEach(async () => {
@@ -37,9 +37,13 @@ describe('Testing API routes', () => {
     });
 
     test('/groups/?tense=present&type=regular', async () => {
-        // await db.query("INSERT INTO groups (tense, type, list) VALUES ('present', 'regular', '{\"regular\": {\"hablar\": [\"hablo\"]}}')")
         const response = await request.get('/groups/?tense=present&type=regular');
         expect(response.body.rows[0].list.regular.hablar[0]).toEqual('hablo');
-    })
+    });
+
+    test('/groups/?tense=preterite&type=regular', async () => {
+        const response = await request.get('/groups/?tense=preterite&type=regular');
+        expect(response.body.rows[0].list.regular.hablar[0]).toEqual('hable');
+    });
 
 })
