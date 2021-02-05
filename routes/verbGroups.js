@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import db from '../queries';
+import db from '../db';
 let router = Router();
 
 router.get('/hello/', (req,res) => {
