@@ -29,11 +29,13 @@ describe('users routes', () => {
     test('GET /users/', async () => {
         const response = await request.get('/users/');
         expect(response.body.length).toEqual(2);
+        expect(response.statusCode).toBe(200);
     });
 
     test('users/:id/', async () => {
         const response = await request.get('/users/1');
         expect(response.body.username).toEqual('user1');
+        expect(response.statusCode).toBe(200);
     });
 
     test('POST /users/', async () => {
