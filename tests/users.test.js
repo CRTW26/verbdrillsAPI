@@ -37,7 +37,9 @@ describe('users routes', () => {
     });
 
     test('POST /users/', async () => {
-        const newUser = await request.post('/users/').send({
+        const newUser = await request
+            .post('/users/')
+            .send({
                 username: 'user11',
                 password: 'password123'
             });
@@ -45,4 +47,8 @@ describe('users routes', () => {
         expect(newUser.body.username).toBe('user11');
         expect(newUser.statusCode).toBe(200);
     });
+
+    // test('PATCH /users/:id', async (req, res) => {
+    //     const data = await
+    // });
 })
