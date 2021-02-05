@@ -4,7 +4,7 @@ const supertest = require('supertest');
 const request = supertest(app);
 import db from '../db';
 
-describe('Testing API routes', () => {
+describe('verbGroups routes', () => {
 
     // let server; 
 
