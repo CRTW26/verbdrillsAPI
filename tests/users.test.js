@@ -46,6 +46,9 @@ describe('users routes', () => {
         expect(newUser.body).toHaveProperty('id');
         expect(newUser.body.username).toBe('user3');
         expect(newUser.statusCode).toBe(200);
+
+        const response = await request.get('/users/');
+        expect(response.body.length).toEqual(3);
     });
 
     test('PATCH /users/:id', async () => {
@@ -61,6 +64,9 @@ describe('users routes', () => {
         expect(updatedUser.body.username).toEqual('user33');
         expect(updatedUser.body).toHaveProperty("id");
         expect(updatedUser.statusCode).toBe(200);
+
+        const response = await request.get('/users/');
+        expect(response.body.length).toEqual(3);
     });
 
     test('DELETE /users/:id', async () => {
@@ -74,6 +80,9 @@ describe('users routes', () => {
             .delete(`/users/${newUser.body.id}`);
         expect(deletedUser.body).toEqual({message: "deleted"});
         expect(deletedUser.statusCode).toBe(200);
+
+        const response = await request.get('/users/');
+        expect(response.body.length).toEqual(2);
     });
 
 })
