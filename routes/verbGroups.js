@@ -1,5 +1,5 @@
 import { Router } from 'express';
-const db = require('../queries');
+import db from '../queries';
 let router = Router();
 
 router.get('/hello/', (req,res) => {

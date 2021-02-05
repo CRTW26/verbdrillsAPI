@@ -7,4 +7,4 @@ let client = new Client({
 
 client.connect();
 
-module.exports = client;
+export default client; 

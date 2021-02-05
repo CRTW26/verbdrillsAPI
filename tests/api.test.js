@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'test';
 const app = require('../index.js');
 const supertest = require('supertest');
 const request = supertest(app);
-const db = require('../queries');
+import db from '../queries';
 
 describe('Testing API routes', () => {
 
