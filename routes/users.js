@@ -33,4 +33,12 @@ router.patch('/:id', async (req, res) => {
     return res.json(returnValues);
 });
 
+router.delete('/:id', async (req, res) => {
+    const data = await db.query(
+        "DELETE FROM users WHERE id=$1",
+        [req.params.id]
+    );
+    return res.json({message: 'deleted'});
+});
+
 export default router; 

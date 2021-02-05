@@ -62,4 +62,18 @@ describe('users routes', () => {
         expect(updatedUser.body).toHaveProperty("id");
         expect(updatedUser.statusCode).toBe(200);
     });
+
+    test('DELETE /users/:id', async () => {
+        const newUser = await request
+        .post('/users/')
+        .send({
+            username: 'user3',
+            password: 'password123'
+        });
+        const deletedUser = await request 
+            .delete(`/users/${newUser.body.id}`);
+        expect(deletedUser.body).toEqual({message: "deleted"});
+        expect(deletedUser.statusCode).toBe(200);
+    });
+
 })
