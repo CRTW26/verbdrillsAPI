@@ -18,10 +18,18 @@ router.get('/:id/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    console.log(req.body)
     const data = await db.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id, username",
         [req.body.username, req.body.password]);
-    const returnValues = {id: data.rows[0].id, username: data.rows[0].username}
+    const returnValues = {id: data.rows[0].id, username: data.rows[0].username};
+    return res.json(returnValues);
+});
+
+router.patch('/:id', async (req, res) => {
+    const data = await db.query(
+        "UPDATE users SET username=$1 WHERE id=$2 RETURNING id, username",
+        [req.body.username, req.params.id]
+    );
+    const returnValues = {id: data.rows[0].id, username: data.rows[0].username};
     return res.json(returnValues);
 });
 

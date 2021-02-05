@@ -40,15 +40,26 @@ describe('users routes', () => {
         const newUser = await request
             .post('/users/')
             .send({
-                username: 'user11',
+                username: 'user3',
                 password: 'password123'
             });
         expect(newUser.body).toHaveProperty('id');
-        expect(newUser.body.username).toBe('user11');
+        expect(newUser.body.username).toBe('user3');
         expect(newUser.statusCode).toBe(200);
     });
 
-    // test('PATCH /users/:id', async (req, res) => {
-    //     const data = await
-    // });
+    test('PATCH /users/:id', async () => {
+        const newUser = await request
+        .post('/users/')
+        .send({
+            username: 'user3',
+            password: 'password123'
+        });
+        const updatedUser = await request 
+            .patch(`/users/${newUser.body.id}`)
+            .send({username: "user33"});
+        expect(updatedUser.body.username).toEqual('user33');
+        expect(updatedUser.body).toHaveProperty("id");
+        expect(updatedUser.statusCode).toBe(200);
+    });
 })
