@@ -26,14 +26,23 @@ describe('users routes', () => {
         db.end();
     });
 
-    test('/users/', async () => {
+    test('GET /users/', async () => {
         const response = await request.get('/users/');
         expect(response.body.length).toEqual(2);
     });
 
     test('users/:id/', async () => {
         const response = await request.get('/users/1');
-        console.log(response.body)
         expect(response.body.username).toEqual('user1');
-    })
+    });
+
+    test('POST /users/', async () => {
+        const newUser = await request.post('/users/').send({
+                username: 'user11',
+                password: 'password123'
+            });
+        expect(newUser.body).toHaveProperty('id');
+        expect(newUser.body.username).toBe('user11');
+        expect(newUser.statusCode).toBe(200);
+    });
 })
