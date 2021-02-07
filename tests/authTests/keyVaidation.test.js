@@ -17,18 +17,24 @@ describe('key validtion', () => {
 
     afterEach(async () => {
         // await db.query('DELETE FROM users');
-        await db.query('DELETE FROM groups');
+        await db.query('DROP TABLE groups');
         await db.query("DROP TABLE users");
     });
 
     afterAll(async () => {
         // await db.query("DROP TABLE users");
-        await db.query("DROP TABLE groups");
+        // await db.query("DROP TABLE groups");
         db.end();
     });
     
     test('/verbgroups/?tense=present&type=regular&key=abc', async () => {
         const response = await request.get('/verbgroups/?tense=present&type=regular&key=abc');
         expect(response.statusCode).toBe(200);
+    });
+
+    test('/verbgroups/?tense=present&type=regular', async () => {
+        const response = await request.get('/verbgroups/?tense=present&type=regular');
+        expect(response.statusCode).toBe(400);
+        expect(response.body).toEqua;("Missing API key");
     });
 })
