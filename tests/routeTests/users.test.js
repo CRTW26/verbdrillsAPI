@@ -1,8 +1,8 @@
 process.env.NODE_ENV = 'test';
-const app = require('../index.js');
+const app = require('../../index.js');
 const supertest = require('supertest');
 const request = supertest(app);
-import db from '../db';
+import db from '../../db';
 
 describe('users routes', () => {
 
