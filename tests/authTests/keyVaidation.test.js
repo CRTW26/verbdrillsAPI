@@ -35,6 +35,6 @@ describe('key validtion', () => {
     test('/verbgroups/?tense=present&type=regular', async () => {
         const response = await request.get('/verbgroups/?tense=present&type=regular');
         expect(response.statusCode).toBe(400);
-        expect(response.body).toEqua;("Missing API key");
+        expect(response.body.response).toEqual("Missing API key");
     });
 })
