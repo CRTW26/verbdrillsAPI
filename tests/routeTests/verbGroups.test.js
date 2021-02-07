@@ -37,17 +37,17 @@ describe('verbGroups routes', () => {
     });
 
     test('/verbgroups/?tense=present&type=regular', async () => {
-        const response = await request.get('/verbgroups/?tense=present&type=regular');
+        const response = await request.get('/verbgroups/?tense=present&type=regular&key=abc');
         expect(response.body.regular.hablar[0]).toEqual('hablo');
     });
 
     test('/verbgroups/?tense=preterite&type=regular', async () => {
-        const response = await request.get('/verbgroups/?tense=preterite&type=regular');
+        const response = await request.get('/verbgroups/?tense=preterite&type=regular&key=abc');
         expect(response.body.regular.hablar[0]).toEqual('hable');
     });
 
     test('/verbgroups/?tense=imperfect&type=regular', async () => {
-        const response = await request.get('/verbgroups/?tense=imperfect&type=regular');
+        const response = await request.get('/verbgroups/?tense=imperfect&type=regular&key=abc');
         expect(response.body.regular.hablar[0]).toEqual('hablaba');
     });
 

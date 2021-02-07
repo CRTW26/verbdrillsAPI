@@ -11,9 +11,9 @@ describe('users routes', () => {
     // });
 
     beforeEach(async () => {
-        await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password VARCHAR(30))");
-        await db.query("INSERT INTO users (username, password) VALUES ('user1', 'password')");
-        await db.query("INSERT INTO users (username, password) VALUES ('user2', 'password')");
+        await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), key VARCHAR(5))");
+        await db.query("INSERT INTO users (username, password, key) VALUES ('user1', 'password', 'abc')");
+        await db.query("INSERT INTO users (username, password, key) VALUES ('user2', 'password', 'abc')");
     });
 
     afterEach(async () => {
@@ -27,20 +27,20 @@ describe('users routes', () => {
     });
 
     test('GET /users/', async () => {
-        const response = await request.get('/users/');
+        const response = await request.get('/users/?key=abc');
         expect(response.body.length).toEqual(2);
         expect(response.statusCode).toBe(200);
     });
 
     test('users/:id/', async () => {
-        const response = await request.get('/users/1');
+        const response = await request.get('/users/1/?key=abc');
         expect(response.body.username).toEqual('user1');
         expect(response.statusCode).toBe(200);
     });
 
     test('POST /users/', async () => {
         const newUser = await request
-            .post('/users/')
+            .post('/users/?key=abc')
             .send({
                 username: 'user3',
                 password: 'password123'
@@ -49,41 +49,41 @@ describe('users routes', () => {
         expect(newUser.body.username).toBe('user3');
         expect(newUser.statusCode).toBe(200);
 
-        const response = await request.get('/users/');
+        const response = await request.get('/users/?key=abc');
         expect(response.body.length).toEqual(3);
     });
 
     test('PATCH /users/:id', async () => {
         const newUser = await request
-        .post('/users/')
+        .post('/users/?key=abc')
         .send({
             username: 'user3',
             password: 'password123'
         });
         const updatedUser = await request 
-            .patch(`/users/${newUser.body.id}`)
+            .patch(`/users/${newUser.body.id}/?key=abc`)
             .send({username: "user33"});
         expect(updatedUser.body.username).toEqual('user33');
         expect(updatedUser.body).toHaveProperty("id");
         expect(updatedUser.statusCode).toBe(200);
 
-        const response = await request.get('/users/');
+        const response = await request.get('/users/?key=abc');
         expect(response.body.length).toEqual(3);
     });
 
     test('DELETE /users/:id', async () => {
         const newUser = await request
-        .post('/users/')
+        .post('/users/?key=abc')
         .send({
             username: 'user3',
             password: 'password123'
         });
         const deletedUser = await request 
-            .delete(`/users/${newUser.body.id}`);
+            .delete(`/users/${newUser.body.id}/?key=abc`);
         expect(deletedUser.body).toEqual({message: "deleted"});
         expect(deletedUser.statusCode).toBe(200);
 
-        const response = await request.get('/users/');
+        const response = await request.get('/users/?key=abc');
         expect(response.body.length).toEqual(2);
     });
 
