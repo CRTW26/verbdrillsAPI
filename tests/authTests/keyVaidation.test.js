@@ -12,7 +12,7 @@ describe('key validtion', () => {
         //Create users table
         await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), key VARCHAR(5))");
         await db.query("INSERT INTO users (username, password, key) VALUES ('user1', 'password', 'abc')");
-        await db.query("INSERT INTO users (username, password, key) VALUES ('user2', 'password', 'abc')");
+        await db.query("INSERT INTO users (username, password, key) VALUES ('user2', 'password', 'def')");
     });
 
     afterEach(async () => {
@@ -36,5 +36,11 @@ describe('key validtion', () => {
         const response = await request.get('/verbgroups/?tense=present&type=regular');
         expect(response.statusCode).toBe(400);
         expect(response.body.response).toEqual("Missing API key");
+    });
+
+    test('/verbgroups.?tense=present&type=regular&key=def', async () => {
+        const response = await request.get('/verbgroups/?tense=present&type=regular&key=ghi');
+        expect(response.statusCode).toBe(400);
+        expect(response.body.response).toEqual("Invalid API key");
     });
 })
