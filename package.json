@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --coverage keyVaidation.test.js verbGroups.test.js users.test.js",
     "dev": "nodemon server.js"
   },
   "author": "",
