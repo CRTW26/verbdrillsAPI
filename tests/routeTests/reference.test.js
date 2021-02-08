@@ -40,7 +40,6 @@ describe('reference routers', () => {
 
     test('GET /reference/abandonar', async () => {
         const response = await request.get('/reference/abandonar/');
-        // console.log(response.body);
         expect(response.body.length).toEqual(18);
         expect(response.statusCode).toBe(200);
     });
