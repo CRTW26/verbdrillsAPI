@@ -6,10 +6,6 @@ import db from '../../db';
 
 describe('users routes', () => {
 
-    // beforeAll(async () => {
-    //     await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password VARCHAR(30))");
-    // });
-
     beforeEach(async () => {
         await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), key VARCHAR(5))");
         await db.query("INSERT INTO users (username, password, key) VALUES ('user1', 'password', 'abc')");
@@ -17,12 +13,10 @@ describe('users routes', () => {
     });
 
     afterEach(async () => {
-        // await db.query('DELETE FROM users');
         await db.query("DROP TABLE users");
     });
 
     afterAll(async () => {
-        // await db.query("DROP TABLE users");
         db.end();
     });
 
