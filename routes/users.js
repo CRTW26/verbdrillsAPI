@@ -18,7 +18,7 @@ router.get('/:id/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const data = await db.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id, username",
+    const data = await db.query("INSERT INTO users (username, password) VALUES ($1, crypt($2, gen_salt('bf'))) RETURNING id, username",
         [req.body.username, req.body.password]);
     const returnValues = {id: data.rows[0].id, username: data.rows[0].username};
     return res.json(returnValues);
