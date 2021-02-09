@@ -7,7 +7,7 @@ import db from '../../db';
 describe('users routes', () => {
 
     beforeEach(async () => {
-        await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), key VARCHAR(5))");
+        await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password TEXT, key VARCHAR(5))");
         await db.query("INSERT INTO users (username, password, key) VALUES ('user1', 'password', 'abc')");
         await db.query("INSERT INTO users (username, password, key) VALUES ('user2', 'password', 'def')");
     });
