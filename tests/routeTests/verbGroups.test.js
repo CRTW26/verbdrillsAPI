@@ -12,7 +12,7 @@ describe('verbGroups routes', () => {
         await db.query("INSERT INTO groups (tense, type, list) VALUES ('preterite', 'regular', '{\"regular\": {\"hablar\": [\"hable\"]}}')")
         await db.query("INSERT INTO groups (tense, type, list) VALUES ('imperfect', 'regular', '{\"regular\": {\"hablar\": [\"hablaba\"]}}')")
 
-        await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), key VARCHAR(5))");
+        await db.query("CREATE TABLE users (ID SERIAL PRIMARY KEY, username VARCHAR(30), password TEXT, key VARCHAR(5))");
         await db.query("INSERT INTO users (username, password, key) VALUES ('user1', 'password', 'abc')");
         await db.query("INSERT INTO users (username, password, key) VALUES ('user2', 'password', 'def')");
     });
