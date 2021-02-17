@@ -5,9 +5,27 @@ const Signup = () => {
     
     function submitHandler(event) {
         event.preventDefault();
-        console.log(event.target[0].value)
-        console.log(event.target[1].value)
-        console.log(event.target[2].value)
+        console.log(event.target[0].value);
+        console.log(event.target[1].value);
+        console.log(event.target[2].value);
+
+        const url = 'http://localhost:3000/users/';
+        const options = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: event.target[0].value,
+                password: event.target[1].value
+            })
+        };
+        fetch(url, options)
+            .then(response => {
+                console.log(response.status);
+                console.log(response);
+            });
     }
 
     return(
