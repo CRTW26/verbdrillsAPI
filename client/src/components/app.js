@@ -6,6 +6,7 @@ import Header from './header';
 // Code-splitting is automated for `routes` directory
 import Home from '../routes/home';
 import Endpoints from '../routes/endpoints';
+import Login from '../routes/login'
 
 const App = () => (
 	<div id="app">
@@ -13,6 +14,7 @@ const App = () => (
 		<Router>
 			<Home path="/" />
 			<Endpoints path="/endpoints/" />
+			<Login path="/login/" />
 		</Router>
 	</div>
 )
