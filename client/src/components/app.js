@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { Router } from 'preact-router';
+import { useState } from 'preact/hooks';
 
 import Header from './header';
 
@@ -9,16 +10,21 @@ import Endpoints from '../routes/endpoints';
 import Login from '../routes/login';
 import Signup from '../routes/signup';
 
-const App = () => (
-	<div id="app">
-		<Header />
-		<Router>
-			<Home path="/" />
-			<Endpoints path="/endpoints/" />
-			<Login path="/login/" />
-			<Signup path="/signup/" />
-		</Router>
-	</div>
-)
+const App = () => {
+
+    const isLoggedIn = useState(true);
+
+    return (
+        <div id="app">
+		<Header authenticated={isLoggedIn} />
+            <Router>
+                <Home path="/" />
+                <Endpoints path="/endpoints/" />
+                <Login path="/login/" />
+                <Signup path="/signup/" />
+            </Router>
+	    </div>
+    );
+}
 
 export default App;
