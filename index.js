@@ -5,8 +5,15 @@ import express from 'express';
 
 const bodyParser = require("body-parser");
 const app = express();
+const cors = require('cors');
 
+app.use(cors());
 app.use(bodyParser.json());
+
+
+// app.use(cors({
+//     origin: "http://localhost:8080/signup"
+// }));
 
 app.use('/verbgroups/', verbGroups);
 app.use('/users/', users);
